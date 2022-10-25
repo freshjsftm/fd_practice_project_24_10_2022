@@ -38,6 +38,7 @@
     - Card number: 4111111111111111
     - Expires end: 09/23
     - cvc/cvv: 505
+    - buyer@gmail.com
   - для вывода средств на карту creator`а:
     - Card number: 5105105105105100
     - Expires end: 09/23
