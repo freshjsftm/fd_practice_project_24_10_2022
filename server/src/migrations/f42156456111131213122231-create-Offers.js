@@ -26,19 +26,16 @@ module.exports = {
       },
       text: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       fileName: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       originalFileName: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
         defaultValue: 'pending',
       },
     });
