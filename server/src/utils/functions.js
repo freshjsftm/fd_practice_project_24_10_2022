@@ -1,4 +1,4 @@
-const bd = require('../models');
+const db = require('../models');
 const CONSTANTS = require('../constants');
 
 module.exports.createWhereForAllContests = (
