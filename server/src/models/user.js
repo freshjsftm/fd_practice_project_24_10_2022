@@ -51,14 +51,6 @@ module.exports = (sequelize, DataTypes) => {
         field: 'passwordHash',
         type: DataTypes.STRING,
         allowNull: false,
-        // set (password) {
-        //   bcrypt.hash(password, SALT_ROUNDS, (err, hashedPass) => {
-        //     if (err) {
-        //       throw err
-        //     }
-        //     this.setDataValue('password', hashedPass)
-        //   })
-        // }
       },
       email: {
         type: DataTypes.STRING,
