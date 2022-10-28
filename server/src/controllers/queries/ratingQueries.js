@@ -1,4 +1,4 @@
-const bd = require('../../models');
+const db = require('../../models');
 const ServerError = require('../../errors/ServerError');
 
 module.exports.updateRating = async (data, predicate, transaction) => {
