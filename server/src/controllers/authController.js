@@ -1,7 +1,7 @@
 const { promisify } = require('util')
 const createHttpError = require('http-errors')
 const jwt = require('jsonwebtoken')
-const { User } = require('../models')
+const { User, RefreshToken } = require('../models')
 const {
   ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_TIME,
@@ -46,7 +46,7 @@ module.exports.signIn = async (req, res, next) => {
       } else {
         await user.createRefreshToken({ value: refreshToken })
       }
-      res.status(201).send({
+      return res.status(201).send({
         data: {
           user,
           tokenPair: {
@@ -84,8 +84,9 @@ module.exports.signUp = async (req, res, next) => {
       REFRESH_TOKEN_SECRET,
       { expiresIn: REFRESH_TOKEN_TIME }
     )
-    await user.createRefreshToken({ value: refreshToken })
-    res.status(201).send({
+    //await user.createRefreshToken({ value: refreshToken })
+    await RefreshToken.create({ userId: user.id ,value: refreshToken })
+    return res.status(201).send({
       data: {
         user,
         tokenPair: {
