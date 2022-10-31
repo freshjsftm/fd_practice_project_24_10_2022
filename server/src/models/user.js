@@ -1,11 +1,12 @@
 'use strict'
-const { Model } = require('sequelize')
 const bcrypt = require('bcrypt')
+const { Model } = require('sequelize')
 const { SALT_ROUNDS } = require('../constants')
 
 async function hashPassword(user, options){
   if(user.changed('password')){
-    const passwordHashed = await bcrypt.hash(user.password, SALT_ROUNDS);
+    const {password} = user;
+    const passwordHashed = await bcrypt.hash(password, SALT_ROUNDS);
     user.password = passwordHashed;
   }  
 }

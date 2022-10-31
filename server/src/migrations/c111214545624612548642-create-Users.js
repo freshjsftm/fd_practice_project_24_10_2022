@@ -47,12 +47,12 @@ module.exports = {
         defaultValue: 0,
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: new Date(),
       }
     })
       .then(() => queryInterface.addConstraint('Users',  {

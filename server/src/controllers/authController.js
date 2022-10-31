@@ -9,6 +9,7 @@ const {
   REFRESH_TOKEN_TIME,
   MAX_DEVICE_AMOUNT
 } = require('../constants')
+
 const signJWT = promisify(jwt.sign)
 
 module.exports.signIn = async (req, res, next) => {
@@ -84,8 +85,7 @@ module.exports.signUp = async (req, res, next) => {
       REFRESH_TOKEN_SECRET,
       { expiresIn: REFRESH_TOKEN_TIME }
     )
-    //await user.createRefreshToken({ value: refreshToken })
-    await RefreshToken.create({ userId: user.id ,value: refreshToken })
+    await user.createRefreshToken({ value: refreshToken })
     return res.status(201).send({
       data: {
         user,

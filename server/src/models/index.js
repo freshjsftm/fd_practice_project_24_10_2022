@@ -24,6 +24,14 @@ fs
     db[ model.name ] = model;
   });
 
+
+for (const modelName in db) {
+  if (Object.hasOwnProperty.call(db, modelName)) {
+    const model = db[modelName];
+    model.associate(db);
+  }
+}
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
