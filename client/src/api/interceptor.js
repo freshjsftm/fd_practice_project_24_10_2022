@@ -15,7 +15,7 @@ httpClient.interceptors.request.use((config) => {
 }, (err) => Promise.reject(err));
 
 httpClient.interceptors.response.use((response) => {
-  if (response.data.data.tokenPair) {
+  if (response && response.data && response.data.data && response.data.data.tokenPair) {
     const {data: {data : {tokenPair: {access, refresh}}}} = response;
     window.localStorage.setItem(CONTANTS.REFRESH_TOKEN, refresh);
     accessToken = access;
@@ -23,7 +23,7 @@ httpClient.interceptors.response.use((response) => {
   return response;
 }, (err) => {
   const refreshToken = window.localStorage.getItem(CONTANTS.REFRESH_TOKEN);
-  if(err.response.status === 408 && refreshToken){
+  if(err.response.status === 419 && refreshToken){
     const {data: {data : {tokenPair: {access, refresh}}}} = httpClient.post('auth/refresh', {refreshToken})
     window.localStorage.setItem(CONTANTS.REFRESH_TOKEN, refresh);
     accessToken = access;

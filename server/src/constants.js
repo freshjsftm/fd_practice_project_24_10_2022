@@ -1,8 +1,8 @@
 module.exports = {
   ACCESS_TOKEN_SECRET: 'secret_for_access_token',
-  ACCESS_TOKEN_TIME: '1h',
+  ACCESS_TOKEN_TIME: '2m',
   REFRESH_TOKEN_SECRET: 'secret_for_refresh_token',
-  REFRESH_TOKEN_TIME: '5d',
+  REFRESH_TOKEN_TIME: '5m',
   MAX_DEVICE_AMOUNT: 3,
   SALT_ROUNDS: 5,
   SQUADHELP_BANK_NUMBER: '4564654564564564',
