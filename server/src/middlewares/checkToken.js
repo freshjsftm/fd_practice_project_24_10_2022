@@ -2,25 +2,18 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const TokenError = require('../errors/TokenError');
 const userQueries =require('../controllers/queries/userQueries');
+const JwtService = require('../services/jwtService')
 
 module.exports.checkAuth = async (req, res, next) => {
-  const accessToken = req.headers.authorization;
-  if (!accessToken) {
-    return next(new TokenError('need token'));
-  }
-  try {
-    const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
+  try {  
+    const {
+      headers: { authorization } // 'Bearer feesgfyhef.ertetet.ertetret'
+    } = req
+    const [, token] = authorization.split(' ');
+    const tokenData = await JwtService.verifyAccessToken(token);
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
-    res.send({
-      firstName: foundUser.firstName,
-      lastName: foundUser.lastName,
-      role: foundUser.role,
-      id: foundUser.id,
-      avatar: foundUser.avatar,
-      displayName: foundUser.displayName,
-      balance: foundUser.balance,
-      email: foundUser.email,
-    });
+    foundUser.password = undefined
+    res.send(foundUser);
   } catch (err) {
     next(new TokenError());
   }
