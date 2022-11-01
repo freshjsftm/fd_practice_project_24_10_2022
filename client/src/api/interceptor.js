@@ -1,6 +1,5 @@
 import axios from 'axios';
 import CONTANTS from '../constants';
-import history from '../browserHistory';
 
 const httpClient = axios.create({
   baseURL: CONTANTS.BASE_URL,
@@ -23,9 +22,14 @@ httpClient.interceptors.response.use((response) => {
   }
   return response;
 }, (err) => {
-  // if (err.response.status === 408 && history.location.pathname !== '/login' && history.location.pathname !== '/registration' && history.location.pathname !== '/') {
-  //   history.replace('/login');
-  // }
+  const refreshToken = window.localStorage.getItem(CONTANTS.REFRESH_TOKEN);
+  if(err.response.status === 408 && refreshToken){
+    const {data: {data : {tokenPair: {access, refresh}}}} = httpClient.post('auth/refresh', {refreshToken})
+    window.localStorage.setItem(CONTANTS.REFRESH_TOKEN, refresh);
+    accessToken = access;
+    err.config.headers.Authorization=`Bearer ${accessToken}`;
+    return axios.request(err.config);//???
+  }
   return Promise.reject(err);
 });
 
