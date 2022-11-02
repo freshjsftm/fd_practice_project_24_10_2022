@@ -2,11 +2,14 @@ const http = require('http')
 const express = require('express')
 const cors = require('cors')
 require('./dbMongo/mongoose')
+require('dotenv').config();
 const router = require('./router')
 const controller = require('./socketInit')
 const handlerError = require('./handlerError/handler')
 ///----------
 //const authRouter = require('./router/authRouter')
+
+
 
 const PORT = process.env.PORT || 5000
 const app = express()

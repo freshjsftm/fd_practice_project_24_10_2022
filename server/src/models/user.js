@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt')
 const { Model } = require('sequelize')
 const { SALT_ROUNDS } = require('../constants')
+//const { ROLES } = require('../constants')
 
 async function hashPassword(user, options){
   if(user.changed('password')){
@@ -63,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       role: {
         type: DataTypes.ENUM('customer', 'creator'),
+        //type: DataTypes.ENUM(...Object.values(ROLES)),
         allowNull: false
       },
       balance: {

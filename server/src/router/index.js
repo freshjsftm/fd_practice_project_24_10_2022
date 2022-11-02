@@ -45,7 +45,6 @@ router.post(
 
 router.post(
   '/getCustomersContests',
-
   contestController.getCustomersContests
 )
 

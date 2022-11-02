@@ -16,12 +16,5 @@
     "dialect": "postgres",
     "operatorsAliases": "Op"
   },
-  "production": {
-    "username": "postgres",
-    "password": "admin",
-    "database": "todo-prod",
-    "host": "localhost",
-    "dialect": "postgres",
-    "operatorsAliases": "Op"
-  }
+  "production": {}
 }
